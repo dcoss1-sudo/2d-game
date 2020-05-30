@@ -85,6 +85,16 @@ public:
 			food.y = rand() % 24;
 			food.food = True;
 		}
+		int size = player.body.size() ;
+		for (int i = 0; i < size && eating; ++i)
+		{
+			// DrawPartialSprite(player.body[i].x * vTileSize.x,player.body[i].y*vTileSize.y, sprIsom, 0, 0, vTileSize.x, vTileSize.y);
+			if (player.x == player.body[i].x  && player.body[i].y ==player.y)
+			{
+				cout <<player.x <<player.body[i].x  <<"'"<< player.body[i].y <<player.y;
+				return false;
+			}
+		}
 		DrawPartialSprite(food.x* vTileSize.x, food.y*vTileSize.y, sprfood, 0, 0, vTileSize.x, vTileSize.y, 1);
 		if (food.x == player.x && food.y == player.y)
 		{
@@ -161,21 +171,21 @@ public:
 		if (prev_x !=player.x || prev_y !=player.y )
 		{
 			//update
-		DrawPartialSprite(player.x* vTileSize.x, player.y*vTileSize.y, sprIsom, 0, 0, vTileSize.x, vTileSize.y);
-		
-		int size = player.body.size() ;
-		// if (size > 0)
-		// {
-		for (int i = 0; i < size ; ++i)
-		{
-			int t1 = player.body[i].x;
-			int t2 = player.body[i].y;
-			player.body[i].x = prev_x;
-			player.body[i].y = prev_y;
-			DrawPartialSprite(player.body[i].x * vTileSize.x,player.body[i].y*vTileSize.y, sprIsom, 0, 0, vTileSize.x, vTileSize.y);
-			prev_x = t1;
-			prev_y = t2;
-		}
+			DrawPartialSprite(player.x* vTileSize.x, player.y*vTileSize.y, sprIsom, 0, 0, vTileSize.x, vTileSize.y);
+			
+			int size = player.body.size() ;
+			// if (size > 0)
+			// {
+			for (int i = 0; i < size ; ++i)
+			{
+				int t1 = player.body[i].x;
+				int t2 = player.body[i].y;
+				player.body[i].x = prev_x;
+				player.body[i].y = prev_y;
+				DrawPartialSprite(player.body[i].x * vTileSize.x,player.body[i].y*vTileSize.y, sprIsom, 0, 0, vTileSize.x, vTileSize.y);
+				prev_x = t1;
+				prev_y = t2;
+			}
 		}
 		else
 		{
@@ -188,16 +198,7 @@ public:
 				
 			}
 		}
-		int size = player.body.size() ;
-		for (int i = 0; i < size && !eating; ++i)
-		{
-			// DrawPartialSprite(player.body[i].x * vTileSize.x,player.body[i].y*vTileSize.y, sprIsom, 0, 0, vTileSize.x, vTileSize.y);
-			if (player.x == player.body[i].x  && player.body[i].y ==player.y)
-			{
-				cout <<player.x <<player.body[i].x  <<"'"<< player.body[i].y <<player.y;
-				return false;
-			}
-		}
+		
 		
 		
 		olc::vi2d vMouse = { GetMouseX(), GetMouseY() };
